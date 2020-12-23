@@ -1,0 +1,365 @@
+/* OMNI WUZ HERE, HE IS THE SOLE CREATOR OF THIS NIGHTMARE 
+I commented the hell out of it per usual, anything not commented is usually just positioning or self-explanitory
+*/
+@charset "utf-8";
+@font-face {
+    font-family: "main";
+    src: url('./assets/trench.otf');
+}
+
+@font-face {
+    font-family: "Kiona";
+    src: url('./assets/Kiona-Regular.ttf');
+}
+
+
+/* Fuck off */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+select, input, form {
+    font-family: "Kiona";
+}
+
+/* Declare Variables */
+
+:root {
+    /* Colours */
+    --textc: #f9f9f9; /* Main text colour */
+    --borderc: #95BBBC; /* Colour of the borders and shit */
+    --empc: #95BBBC; /* same as border color, minor highlights */
+    --bgc: #00000095; /* sidebarbg */
+    --altbgc: #0b0e1120; /* mainbg */
+    --linkc: teal; /* l i n k */
+    --linkhc: rgb(54, 241, 241); /* link hover color */
+    --marqc: #000000; /* marquee bg color */
+    /* Size vars, mainly so I can use calcs instead of wanting to kms */
+    /* --sidebarwidth: 25%; */
+    --sidebarwidth: min(25%, 200px); /* sidebar width : I FUCKING LOVE MIN()!!!! 200px is the cap width unless it is greater than 25% the screen, then the list will change to be 25% */
+    --mainwidth: calc(100% - var(--sidebarwidth)); /* Takes the remaining space, fr's suck dick */
+    --marqh: 23px; /* Top Marquee height */
+    --evh: calc(100% - var(--marqh)); /* Height of the other containers (everything else) (subtracting the marquee height) */
+    --appsize: 40px; /* THEY'RE WEBAPPS FUCK OFF, webapp icon size */
+    --listbord: 8px; /* sidebar border size */
+    /* Sizing shit to make the marquee not rape everything */
+    --marqpadd: 2px; /* marquee padding */
+    --marqbrd: 3px; /* marquee border size */
+    --marqtotal: calc(var(--marqbrd) + var(--marqpadd)); /* deprecated, fuck off */
+}
+
+
+/* Apply Variables */
+
+body {
+    color: var(--textc);
+    background: url(./assets/bg.png);
+    background-attachment: fixed;
+    font-family: "main";
+    height: 100vh;
+    /* Also a placeholder unless I like it */
+    overflow: hidden; /* All of the subcontainers should handle overflow, if not the overflow goes in the t r a s h */
+}
+
+
+/* Global configs and clearing of default styling */
+
+a {
+    font-style: normal;
+    color: var(--linkc);
+}
+
+a:hover {
+    color: var(--linkhc);
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background-color: #111;
+}
+
+::-webkit-scrollbar-thumb {
+    color: var(--empc);
+    background-color: var(--empc);
+}
+
+/* Assorted helpers */
+
+.spacer {
+    height: 3%; /* Used between the weather and the searchbar, adjust this percent */
+}
+
+.vertspacer { /* Deprecated */
+    width: 20px;
+    display: inline;
+}
+
+/* Containers */
+
+.sidebarcon {
+    width: var(--sidebarwidth);
+    height: var(--evh);
+    position: absolute;
+    top: var(--marqh); /* Shifts down the marquee height */
+    left: 0;
+    border-right: var(--listbord) double var(--borderc);
+    background-color: var(--bgc); 
+    overflow: auto; /* Should only be an issue on absurdly small screensize */
+}
+
+.maincon {
+    width: var(--mainwidth);
+    height: var(--evh);
+    position: absolute;
+    top: var(--marqh);
+    left: var(--sidebarwidth); /* Shifts left the sidebar width */
+    background-color: var(--altbgc);
+    overflow: auto;
+}
+
+.maincon * { 
+    margin-left: var(--listbord); /* Push all of the maincontainers children left away from the border */
+    max-width: 100%; /* Prevent overflow */
+  /*  overflow: auto; /* You shouldnt need this */
+    overflow-wrap: break-word; /* In case of stupidass link */
+}
+
+/* Subcons and main user-interactables */
+
+.marq {
+    background-color: var(--marqc);
+    height: var(--marqh);
+    width: 100%;
+    position: absolute;
+    font-size: 20px;
+    top: 0;
+    padding-top: 2px;
+    border-bottom: 3px solid var(--borderc);
+    z-index: 999;
+}
+
+.sidebarcon > a {
+    width: var(--appsize);
+    height: var(--appsize);
+    margin: 10px;
+    text-align: center;
+    transform-style: preserve-3d;
+    color: transparent; /* idk why I need this but it showed weird artifacts under the pictures */
+}
+
+.sidebarcon > hr {
+    border: solid 2px var(--borderc);
+}
+
+.sidebarcon > a > img {
+    width: var(--appsize);
+    height: var(--appsize);
+    margin-top: 10px;
+    transition: ease-in-out 0.2s all;
+}
+
+.sidebarcon > a:hover > img {
+    transform: rotateZ(10deg);
+    /* animation: selected 0.5s; */
+}
+
+.daclock{
+    margin-top: 10px;
+    text-align: center;
+    overflow-wrap: break-word; /* Breaks the clock up if theres no room */
+    font-size: 30px;
+    color: var(--empc);
+    cursor: default; /* Looks cleaner */
+    animation: sectest infinite 1s; /* fade-in-out every 1 second to indiciate time progression */
+}
+
+.dasecs {
+    position: absolute;
+    top: 5px;
+    opacity: 0;
+    right: 3px;
+    transition: ease-in-out 0.5s opacity;
+}
+
+.daclock:hover ~ .dasecs { /* Stupidass tilde just means nextdoor neighbor in the DOM */
+    opacity: 1;
+}
+
+@keyframes sectest{
+    0% {
+        filter: brightness(1)
+    }
+    50% {
+        filter: brightness(2);
+    }
+    100% {
+        filter: brightness(1);
+    }
+}
+
+/* @keyframes selected {
+    0% { 
+        transform: rotateZ(0deg);
+    }
+    75% { 
+        transform: rotateZ(20deg);
+    }
+    100% { 
+        transform: rotateZ(10deg);
+    }
+}
+*/
+
+.weather {
+    border-bottom: 3px solid var(--borderc);
+    margin-left: 0px; /* Override the shifting of other elements, this one sizes properly */
+}
+
+.maincon ul {
+    font-family: "Kiona";
+    font-size: 20px;
+}
+
+.linkheader { /* The icon  */
+    height: 20px;
+    width: 20px;
+}
+
+li a:hover{
+    text-shadow: 0px 0px 5px;
+}
+
+
+.googleshit {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.googleshit input {
+    width: var(--mainwidth);
+    border: none;
+}
+
+input::placeholder {
+    text-align: center;
+}
+
+input {
+    text-align: center;
+    color: var(--textc);
+    background-color: transparent;
+    border-bottom: 1px solid var(--borderc) !important;
+    padding: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+input:hover {
+    width: 70%; /* Makes the bar shrink */
+    padding: 5px; /* Raises the text up on hover */
+}
+
+input:focus {
+ outline: none;
+ width: 70%;
+ padding: 5px;
+}
+
+/* ------------------- */
+
+.radio {
+    position: absolute;
+    bottom: 25px; /* Was too lazy to set up vars, the "now playing" and radio are positioned independant so u gotta manually adjust em all */
+    color: var(--textc);
+    left: 0;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: 0 auto;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nowplayingcon{
+    position: absolute;
+    font-family: "Kiona";
+    font-size: 14px;
+    bottom: 10px;
+    color: var(--textc);
+    left: 0;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: 0 auto;
+    background-color: transparent;
+    cursor: default;
+}
+
+.nowplayingcon * {
+    display: inline-block;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    text-align: center;
+    text-align-last: center;
+    /* Only For ChromeBased, Centers The Text For The Select Box. */
+    transition: all 0.3s ease;
+    border: 0px;
+    outline: 0px;
+}
+
+.radio:hover {
+    bottom: 28px
+}
+
+option {
+    background-color: #040505; /* Close enough to the colour of the main sidebar bg */
+    backdrop-filter: blur(4px);
+    border: none;
+    outline: none;
+    /* Change background of the list when ur picking a station */
+}
+
+/* Extra color shit for the marquee, at the bottom so its out of the fucking way */
+
+.cx1 {
+    color: rgb(20, 172, 164);
+}
+
+.cx2 {
+    color: tomato;
+}
+
+.cx3 {
+    color: rgb(45, 170, 112)
+}
+
+.cx4 {
+    color: rgb(0, 183, 255);
+}
+
+.cx5{
+    color: #7289DA; /* Discord Burble */
+}
+
+.cx6 {
+    color: rgb(255, 255, 145);
+}
+
+.cx7 {
+    color: rgb(209, 92, 164);
+}
+
+.cx8 {
+    color: rgb(93, 93, 226);
+}
