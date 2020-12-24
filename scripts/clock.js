@@ -1,13 +1,11 @@
-// I stole all of this because im a lazy bastard
-function clock() {// We create a new Date object and assign it to a variable called "time".
+// This was a basic example clock I found online. I don't remember where I got it from,
+// But I take no credit for this.
+function clock() {
 var time = new Date(),
     
-    // Access the "getHours" method on the Date object with the dot accessor.
     hours = time.getHours(),
     
-    // Access the "getMinutes" method with the dot accessor.
     minutes = time.getMinutes(),
-    
     
     seconds = time.getSeconds();
 

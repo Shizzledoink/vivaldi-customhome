@@ -35,4 +35,3 @@
             check_status();
             setInterval(check_status, 15000);
         });
-        // I DONT KNOW HOW THIS SHIT WORKS, DONT EXPECT ME TO EXPLAIN ANY OF IT 
