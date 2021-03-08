@@ -56,6 +56,8 @@ select, input, form {
 body {
     color: var(--textc);
     background: url(./assets/bg.png);
+    /* fallback background colour */
+    background-color: #080b0d;
     background-attachment: fixed;
     font-family: "main";
     height: 100vh;
@@ -244,11 +246,11 @@ li a:hover{
     border: none;
 }
 
-input::placeholder {
+.googleshit input::placeholder {
     text-align: center;
 }
 
-input {
+.googleshit input {
     text-align: center;
     color: var(--textc);
     background-color: transparent;
@@ -257,12 +259,12 @@ input {
     transition: all 0.3s ease-in-out;
 }
 
-input:hover {
+.googleshit input:hover {
     width: 70%; /* Makes the bar shrink */
     padding: 5px; /* Raises the text up on hover */
 }
 
-input:focus {
+.googleshit input:focus {
  outline: none;
  width: 70%;
  padding: 5px;
@@ -270,9 +272,12 @@ input:focus {
 
 /* ------------------- */
 
+.lainoncon {
+	position: absolute;
+	bottom: 0;
+}
+
 .radio {
-    position: absolute;
-    bottom: 25px; /* Was too lazy to set up vars, the "now playing" and radio are positioned independant so u gotta manually adjust em all */
     color: var(--textc);
     left: 0;
     width: 100%;
@@ -287,7 +292,6 @@ input:focus {
 }
 
 .nowplayingcon{
-    position: absolute;
     font-family: "Kiona";
     font-size: 14px;
     bottom: 10px;
@@ -305,6 +309,35 @@ input:focus {
     display: inline-block;
 }
 
+.slider {
+    margin: 0 auto;
+    align-self: center;
+    position: relative;
+    width: 90%;
+    left: 50%;
+    transform: translate(-50%);
+    -webkit-appearance: none;
+    background: #0a0a0a90;
+    height: 0.5ch;
+    outline: none;
+}  
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 2ch;
+  height: 1ch;
+  background: var(--borderc);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 2ch;
+  height: 1ch;
+  background: var(--borderc);
+  cursor: pointer;
+}
+
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -319,7 +352,7 @@ select {
 }
 
 .radio:hover {
-    bottom: 28px
+    padding-bottom: 0.5ch;
 }
 
 option {

@@ -131,6 +131,7 @@
         <img src="./icons/twitter.svg" alt="">
     </a>
     <!----------------------------------------------------------------------- -->
+       <div class="lainoncon">
         <select class="radio" id="channel" onchange="change_channel(this);">
             <option value="" disabled selected>LAINON</option>
             <option value="everything">everything</option>
@@ -138,10 +139,13 @@
             <option value="cyberia">cyberia</option>
             <option value="swing">swing</option>
         </select>
+  <input type="range" min="0" max="100" value="100" class="slider" id="lainvolume">
         <div class="nowplayingcon"><marquee class="nowplaying" truespeed="" scrolldelay="30" scrollamount="2"> </marquee></div>
-        <audio id="player" controls="" autoplay="" preload="none" style="margin: 0 5% 20px 5%; width: 90%; box-shadow: 0px 0px 5px black; visibility: hidden;">        <source id="oggsource" src="https://lainon.life/radio/cyberia.ogg" type="audio/ogg">  <source id="mp3source" src="https://lainon.life/radio/cyberia.mp3" type="audio/mpeg">        <em>Your browser lacks support for OGG Vorbis files. Please open the M3U file or XSPF file in a multimedia player.</em>
+        <audio id="player" controls="" autoplay="" preload="none" style="width: 90%; height: 1px; box-shadow: 0px 0px 5px black; visibility: hidden;">        <source id="oggsource" src="https://lainon.life/radio/cyberia.ogg" type="audio/ogg">  <source id="mp3source" src="https://lainon.life/radio/cyberia.mp3" type="audio/mpeg">        <em>Your browser lacks support for OGG Vorbis files. Please open the M3U file or XSPF file in a multimedia player.</em>
         </audio>
         <script src="./scripts/changechannel.js"></script>
+	<script src="./scripts/volslide.js"></script>
+    </div>
     <!-- ----------------------------------  -->
         </div>
 </body>
